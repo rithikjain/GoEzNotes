@@ -14,8 +14,9 @@ type RegisterRequest struct {
 }
 
 type User struct {
-	UserID    int64     `json:"id"`
-	Username  string    `json:"username"`
-	Email     string    `json:"email"`
+	UserID    int64  `gorm:"primary_key" json:"id"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	Password  string
 	CreatedAt time.Time `json:"created_at"`
 }

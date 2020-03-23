@@ -1,10 +1,21 @@
 package models
 
-func CreateUser(username, email, password string) (error, int64) {
-	insertQ, err := con.Exec("INSERT INTO user (username, email, password) VALUES (?, ?, ?)", username, email, password)
-	if err != nil {
-		return err, -1
+import (
+	"github.com/rithikjain/TodoApi/api/views"
+	"time"
+)
+
+func CreateUser(username, email, password string) (int64, error) {
+	user := views.User{
+		Username:  username,
+		Email:     email,
+		Password:  password,
+		CreatedAt: time.Now(),
 	}
-	id, _ := insertQ.LastInsertId()
-	return nil, id
+	err := con.Create(&user).Error
+	if err != nil {
+		return -1, err
+	}
+
+	return user.UserID, err
 }

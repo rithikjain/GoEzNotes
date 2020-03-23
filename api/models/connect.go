@@ -1,15 +1,16 @@
 package models
 
 import (
-	"database/sql"
 	"fmt"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
 )
 
-var con *sql.DB
+var con *gorm.DB
 
-func Connect() *sql.DB {
-	db, err := sql.Open("mysql", "root:30june@/todoapi")
+func Connect() *gorm.DB {
+	db, err := gorm.Open("mysql", "root:30june@/todoapi")
 	if err != nil {
 		log.Fatal(err)
 	}

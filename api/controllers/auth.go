@@ -2,12 +2,12 @@ package controllers
 
 import (
 	"encoding/json"
+	"github.com/rithikjain/TodoApi/api/models"
+	"github.com/rithikjain/TodoApi/api/views"
 	"log"
 	"net/http"
 	"time"
 
-	"github.com/rithikjain/TodoApi/api/models"
-	"github.com/rithikjain/TodoApi/api/views"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -26,7 +26,7 @@ func RegisterUser() http.HandlerFunc {
 				log.Fatal(hashErr)
 				return
 			}
-			err, id := models.CreateUser(data.Name, data.Email, hashPass)
+			id, err := models.CreateUser(data.Name, data.Email, hashPass)
 			if err != nil {
 				_, _ = w.Write([]byte("Error in creating user!"))
 				return
@@ -36,6 +36,7 @@ func RegisterUser() http.HandlerFunc {
 				UserID:    id,
 				Username:  data.Name,
 				Email:     data.Email,
+				Password:  hashPass,
 				CreatedAt: time.Now(),
 			}
 			_ = json.NewEncoder(w).Encode(user)
