@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/rithikjain/TodoApi/api/controllers"
+)
 
 func main() {
-	fmt.Println("Test 123...")
+	mux := controllers.Register()
+	fmt.Println("Serving...")
+	log.Fatal(http.ListenAndServe("localhost:3000", mux))
 }
