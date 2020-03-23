@@ -1,10 +1,10 @@
 package models
 
-func CreateUser(username, email, password string) error {
-	insertQ, err := con.Query("INSERT INTO user (username, email, password) VALUES (?, ?, ?)", username, email, password)
-	defer insertQ.Close()
+func CreateUser(username, email, password string) (error, int64) {
+	insertQ, err := con.Exec("INSERT INTO user (username, email, password) VALUES (?, ?, ?)", username, email, password)
 	if err != nil {
-		return err
+		return err, -1
 	}
-	return nil
+	id, _ := insertQ.LastInsertId()
+	return nil, id
 }

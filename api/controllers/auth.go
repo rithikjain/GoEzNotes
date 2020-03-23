@@ -4,11 +4,17 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/rithikjain/TodoApi/api/models"
 	"github.com/rithikjain/TodoApi/api/views"
 	"golang.org/x/crypto/bcrypt"
 )
+
+type JWTToken struct {
+	AccessToken string    `json:"token"`
+	ExpiresAt   time.Time `json:"expires_at"`
+}
 
 func RegisterUser() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -20,13 +26,19 @@ func RegisterUser() http.HandlerFunc {
 				log.Fatal(hashErr)
 				return
 			}
-			err := models.CreateUser(data.Name, data.Email, hashPass)
+			err, id := models.CreateUser(data.Name, data.Email, hashPass)
 			if err != nil {
 				w.Write([]byte("Error in creating user!"))
 				return
 			}
 			w.WriteHeader(http.StatusCreated)
-			w.Write([]byte("User Succesfully Created."))
+			user := views.User{
+				UserID:    id,
+				Username:  data.Name,
+				Email:     data.Email,
+				CreatedAt: time.Now(),
+			}
+			json.NewEncoder(w).Encode(user)
 		}
 	}
 }
