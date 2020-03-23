@@ -20,7 +20,7 @@ func RegisterUser() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
 			data := views.RegisterRequest{}
-			json.NewDecoder(r.Body).Decode(&data)
+			_ = json.NewDecoder(r.Body).Decode(&data)
 			hashPass, hashErr := HashPassword(data.Password)
 			if hashErr != nil {
 				log.Fatal(hashErr)
@@ -28,7 +28,7 @@ func RegisterUser() http.HandlerFunc {
 			}
 			err, id := models.CreateUser(data.Name, data.Email, hashPass)
 			if err != nil {
-				w.Write([]byte("Error in creating user!"))
+				_, _ = w.Write([]byte("Error in creating user!"))
 				return
 			}
 			w.WriteHeader(http.StatusCreated)
@@ -38,7 +38,7 @@ func RegisterUser() http.HandlerFunc {
 				Email:     data.Email,
 				CreatedAt: time.Now(),
 			}
-			json.NewEncoder(w).Encode(user)
+			_ = json.NewEncoder(w).Encode(user)
 		}
 	}
 }
