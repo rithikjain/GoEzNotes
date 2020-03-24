@@ -1,13 +1,18 @@
 package controllers
 
-import "net/http"
+import (
+	"github.com/gorilla/mux"
+)
 
-func Register() *http.ServeMux {
-	mux := http.NewServeMux()
+func Register() *mux.Router {
+	router := mux.NewRouter()
 
-	mux.HandleFunc("/ping", ping())
-	mux.HandleFunc("/user/register", RegisterUser())
-	mux.HandleFunc("/user/login", LoginUser())
+	// Test Route
+	router.HandleFunc("/ping", ping())
 
-	return mux
+	// Auth Route
+	router.HandleFunc("/user/register", RegisterUser()).Methods("POST")
+	router.HandleFunc("/user/login", LoginUser()).Methods("POST")
+
+	return router
 }

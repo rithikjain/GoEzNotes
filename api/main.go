@@ -18,9 +18,9 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	mux := controllers.Register()
+	router := controllers.Register()
 	db := models.Connect()
 	defer db.Close()
 	fmt.Println("Serving...")
-	log.Fatal(http.ListenAndServe("localhost:3000", mux))
+	log.Fatal(http.ListenAndServe("localhost:3000", router))
 }

@@ -9,31 +9,27 @@ import (
 
 func RegisterUser() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == http.MethodPost {
-			user := &models.User{}
-			err := json.NewDecoder(r.Body).Decode(user)
-			if err != nil {
-				utils.Respond(w, utils.Message(false, err.Error()))
-				return
-			}
-
-			response := user.Create()
-			utils.Respond(w, response)
+		user := &models.User{}
+		err := json.NewDecoder(r.Body).Decode(user)
+		if err != nil {
+			utils.Respond(w, utils.Message(false, err.Error()))
+			return
 		}
+
+		response := user.Create()
+		utils.Respond(w, response)
 	}
 }
 
 func LoginUser() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == http.MethodPost {
-			user := &models.User{}
-			err := json.NewDecoder(r.Body).Decode(user)
-			if err != nil {
-				utils.Respond(w, utils.Message(false, err.Error()))
-				return
-			}
-			res := models.Login(user.Email, user.Password)
-			utils.Respond(w, res)
+		user := &models.User{}
+		err := json.NewDecoder(r.Body).Decode(user)
+		if err != nil {
+			utils.Respond(w, utils.Message(false, err.Error()))
+			return
 		}
+		res := models.Login(user.Email, user.Password)
+		utils.Respond(w, res)
 	}
 }
