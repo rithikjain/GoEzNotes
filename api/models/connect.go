@@ -7,14 +7,14 @@ import (
 	"log"
 )
 
-var con *gorm.DB
+var db *gorm.DB
 
 func Connect() *gorm.DB {
-	db, err := gorm.Open("mysql", "root:30june@/todoapi")
+	con, err := gorm.Open("mysql", "root:30june@/todoapi?charset=utf8&parseTime=True")
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println("Connected to DB...")
-	con = db
-	return db
+	db = con
+	return con
 }

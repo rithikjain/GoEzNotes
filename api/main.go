@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/rithikjain/TodoApi/api/views"
 	"log"
 	"net/http"
 
@@ -15,7 +14,9 @@ import (
 func main() {
 	mux := controllers.Register()
 	db := models.Connect()
-	db.CreateTable(&views.User{})
+	if !db.HasTable(&models.User{}) {
+		db.CreateTable(&models.User{})
+	}
 	defer db.Close()
 	fmt.Println("Serving...")
 	log.Fatal(http.ListenAndServe("localhost:3000", mux))

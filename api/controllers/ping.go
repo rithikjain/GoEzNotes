@@ -2,14 +2,13 @@ package controllers
 
 import (
 	"encoding/json"
+	"github.com/rithikjain/TodoApi/api/models"
 	"net/http"
-
-	"github.com/rithikjain/TodoApi/api/views"
 )
 
 func ping() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		data := views.PingResponse{
+		data := models.PingResponse{
 			Code: http.StatusOK,
 			Body: "pong",
 		}
