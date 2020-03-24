@@ -26,6 +26,9 @@ func Connect() *gorm.DB {
 	if !con.HasTable(&User{}) {
 		con.CreateTable(&User{})
 	}
+	if !con.HasTable(&Note{}) {
+		con.CreateTable(&Note{})
+	}
 	db = con
 	return con
 }

@@ -99,6 +99,16 @@ func Login(email, password string) map[string]interface{} {
 	return res
 }
 
+func GetUser(id uint) *User {
+	user := &User{}
+	db.Where("id = ?", id).First(user)
+	if user.Email == "" {
+		return nil
+	}
+	user.Password = ""
+	return user
+}
+
 func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	return string(bytes), err

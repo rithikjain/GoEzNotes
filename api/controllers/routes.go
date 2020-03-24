@@ -2,17 +2,24 @@ package controllers
 
 import (
 	"github.com/gorilla/mux"
+	"github.com/rithikjain/TodoApi/api/middleware"
 )
 
 func Register() *mux.Router {
 	router := mux.NewRouter()
 
+	// JWT Middleware
+	router.Use(middleware.JwtAuthentication)
+
 	// Test Route
 	router.HandleFunc("/ping", ping())
 
-	// Auth Route
-	router.HandleFunc("/user/register", RegisterUser()).Methods("POST")
-	router.HandleFunc("/user/login", LoginUser()).Methods("POST")
+	// Auth Routes
+	router.HandleFunc("/api/user/register", RegisterUser()).Methods("POST")
+	router.HandleFunc("/api/user/login", LoginUser()).Methods("POST")
+
+	// Notes Routes
+	router.HandleFunc("/api/notes/new", CreateNote()).Methods("POST")
 
 	return router
 }

@@ -17,3 +17,10 @@ type User struct {
 	Password string `json:"password"`
 	Token    string `gorm:"-" json:"token"`
 }
+
+type Note struct {
+	NoteID uint   `gorm:"primary_key" json:"note_id"`
+	UserID uint   `json:"user_id"`
+	Title  string `json:"title"`
+	Body   string `json:"body"`
+}
