@@ -9,6 +9,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "github.com/lib/pq"
 	"github.com/rithikjain/TodoApi/api/controllers"
 	"github.com/rithikjain/TodoApi/api/models"
 )
