@@ -1,0 +1,50 @@
+{
+	"ImportPath": "github.com/rithikjain/TodoApi/api",
+	"GoVersion": "go1.13",
+	"GodepVersion": "v80",
+	"Deps": [
+		{
+			"ImportPath": "github.com/dgrijalva/jwt-go",
+			"Comment": "v3.2.0-20-gdc14462",
+			"Rev": "dc14462fd58732591c7fa58cc8496d6824316a82"
+		},
+		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.5.0-5-g681ffa8",
+			"Rev": "681ffa848bae8d0d7b1a452963c0705b132308f7"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.7.4",
+			"Rev": "75dcda0896e109a2a22c9315bca3bb21b87b2ba5"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/gorm",
+			"Comment": "v1.9.12-3-g7ea143b",
+			"Rev": "7ea143b5484fe28148d5c73cfd43b26e8a89c94e"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/gorm/dialects/mysql",
+			"Comment": "v1.9.12-3-g7ea143b",
+			"Rev": "7ea143b5484fe28148d5c73cfd43b26e8a89c94e"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/inflection",
+			"Comment": "v1.0.0-2-g196e6ce",
+			"Rev": "196e6ce06ca4513fbcfcbc35dc15f66074df47c9"
+		},
+		{
+			"ImportPath": "github.com/joho/godotenv",
+			"Comment": "v1.3.0-14-gd6ee687",
+			"Rev": "d6ee6871f21dd95e76563a90f522ce9fe75443f8"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/bcrypt",
+			"Rev": "891825fb96dfc23279b4a42f710d49e78e05b333"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/blowfish",
+			"Rev": "891825fb96dfc23279b4a42f710d49e78e05b333"
+		}
+	]
+}
