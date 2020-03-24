@@ -1,6 +1,7 @@
 package models
 
 import (
+	"context"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/jinzhu/gorm"
 	"github.com/rithikjain/TodoApi/api/utils"
@@ -107,6 +108,16 @@ func GetUser(id uint) *User {
 	}
 	user.Password = ""
 	return user
+}
+
+func ShowUserDetails(ctx context.Context) map[string]interface{} {
+	user := GetUser(ctx.Value("user").(uint))
+	if user == nil {
+		return utils.Message(false, "UserNotFoundError")
+	}
+	res := make(map[string]interface{})
+	res["user"] = user
+	return res
 }
 
 func HashPassword(password string) (string, error) {

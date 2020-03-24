@@ -33,3 +33,10 @@ func LoginUser() http.HandlerFunc {
 		utils.Respond(w, res)
 	}
 }
+
+func ShowUserDetails() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		res := models.ShowUserDetails(r.Context())
+		utils.Respond(w, res)
+	}
+}

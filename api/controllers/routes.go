@@ -17,6 +17,7 @@ func Register() *mux.Router {
 	// Auth Routes
 	router.HandleFunc("/api/user/register", RegisterUser()).Methods("POST")
 	router.HandleFunc("/api/user/login", LoginUser()).Methods("POST")
+	router.HandleFunc("/api/user/details", ShowUserDetails()).Methods("GET")
 
 	// Notes Routes
 	router.HandleFunc("/api/notes/new", CreateNote()).Methods("POST")
