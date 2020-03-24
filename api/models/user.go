@@ -6,6 +6,7 @@ import (
 	"github.com/rithikjain/TodoApi/api/utils"
 	"golang.org/x/crypto/bcrypt"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -56,7 +57,7 @@ func (user *User) Create() map[string]interface{} {
 	// JWT Token Creation
 	tk := JWTToken{UserID: user.ID}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, tk)
-	tokenString, err := token.SignedString([]byte("AirplaneFly"))
+	tokenString, err := token.SignedString([]byte(os.Getenv("jwt_secret")))
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -87,7 +88,7 @@ func Login(email, password string) map[string]interface{} {
 	// JWT Token Creation
 	tk := JWTToken{UserID: user.ID}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, tk)
-	tokenString, err := token.SignedString([]byte("AirplaneFly"))
+	tokenString, err := token.SignedString([]byte(os.Getenv("jwt_secret")))
 	if err != nil {
 		log.Fatalln(err)
 	}

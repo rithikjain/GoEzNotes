@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/joho/godotenv"
 	"log"
 	"net/http"
 
@@ -12,11 +13,13 @@ import (
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	mux := controllers.Register()
 	db := models.Connect()
-	if !db.HasTable(&models.User{}) {
-		db.CreateTable(&models.User{})
-	}
 	defer db.Close()
 	fmt.Println("Serving...")
 	log.Fatal(http.ListenAndServe("localhost:3000", mux))

@@ -5,11 +5,6 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type PingResponse struct {
-	Code int         `json:"code"`
-	Body interface{} `json:"body"`
-}
-
 type JWTToken struct {
 	UserID uint
 	jwt.StandardClaims
