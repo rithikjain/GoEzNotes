@@ -19,3 +19,10 @@ func CreateNote() http.HandlerFunc {
 		utils.Respond(w, res)
 	}
 }
+
+func ShowAllNotes() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		res := models.ShowAllNotes(r.Context())
+		utils.Respond(w, res)
+	}
+}

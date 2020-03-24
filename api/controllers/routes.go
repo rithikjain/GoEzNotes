@@ -20,6 +20,7 @@ func Register() *mux.Router {
 
 	// Notes Routes
 	router.HandleFunc("/api/notes/new", CreateNote()).Methods("POST")
+	router.HandleFunc("/api/notes", ShowAllNotes()).Methods("GET")
 
 	return router
 }
