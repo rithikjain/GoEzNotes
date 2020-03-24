@@ -5,6 +5,7 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"net/http"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -22,5 +23,16 @@ func main() {
 	db := models.Connect()
 	defer db.Close()
 	fmt.Println("Serving...")
-	log.Fatal(http.ListenAndServe("localhost:3000", router))
+	log.Fatal(http.ListenAndServe(GetPort(), router))
+}
+
+// Get the Port from the environment so we can run on Heroku
+func GetPort() string {
+	var port = os.Getenv("PORT")
+	// Set a default port if there is nothing in the environment
+	if port == "" {
+		port = "4747"
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
+	}
+	return ":" + port
 }
